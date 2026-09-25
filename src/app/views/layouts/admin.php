@@ -2,7 +2,7 @@
 use App\Core\Auth;
 use App\Core\Csrf;
 
-$schoolName = setting('ten_truong');
+$schoolName = setting('ten_truong', APP_NAME);
 $pageTitle = (!empty($title) ? $title . ' | ' : '') . 'Trang quản trị – ' . $schoolName;
 $currentUser = Auth::user();
 $adminTabs = [

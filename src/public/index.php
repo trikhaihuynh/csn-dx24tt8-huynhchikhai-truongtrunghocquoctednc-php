@@ -9,6 +9,7 @@ define('PUBLIC_PATH', __DIR__);
 $config = require APP_PATH . '/config/config.php';
 define('APP_URL', $config['app']['url']);
 define('APP_ENV', $config['app']['env']);
+define('APP_NAME', $config['app']['name']);
 
 error_reporting(E_ALL);
 if (APP_ENV === 'development') {

@@ -12,6 +12,13 @@ function url(string $path = ''): string
     return rtrim(APP_URL, '/') . '/' . ltrim($path, '/');
 }
 
+function safe_url(?string $url): string
+{
+    $url = trim((string) $url);
+
+    return preg_match('#^https?://#i', $url) === 1 ? $url : '#';
+}
+
 function asset(string $path): string
 {
     return url('assets/' . ltrim($path, '/'));
@@ -19,7 +26,12 @@ function asset(string $path): string
 
 function upload_url(?string $relativePath): string
 {
-    return $relativePath ? url('uploads/' . ltrim($relativePath, '/')) : asset('img/placeholder.jpg');
+    $relativePath = ltrim((string) $relativePath, '/');
+    if ($relativePath === '' || !is_file(PUBLIC_PATH . '/uploads/' . $relativePath)) {
+        return asset('img/placeholder.jpg');
+    }
+
+    return url('uploads/' . $relativePath);
 }
 
 function old(string $key, mixed $default = ''): mixed

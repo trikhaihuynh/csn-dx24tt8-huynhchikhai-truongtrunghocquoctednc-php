@@ -1,5 +1,5 @@
 <?php
-$schoolName = setting('ten_truong');
+$schoolName = setting('ten_truong', APP_NAME);
 $pageTitle = !empty($title) ? $title . ' | ' . $schoolName : $schoolName;
 ?>
 <!DOCTYPE html>
@@ -8,7 +8,7 @@ $pageTitle = !empty($title) ? $title . ' | ' . $schoolName : $schoolName;
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title><?= e($pageTitle) ?></title>
-    <meta name="description" content="<?= e($schoolName . ' – ' . setting('slogan')) ?>">
+    <meta name="description" content="<?= e(setting('gioi_thieu', $schoolName)) ?>">
     <link rel="icon" href="<?= e(asset('img/logo.svg')) ?>" type="image/svg+xml">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>

@@ -1,9 +1,9 @@
 <header class="site-header">
     <div class="container site-header__inner">
-        <a class="brand" href="<?= e(url('/')) ?>" aria-label="<?= e(setting('ten_truong')) ?> – Trang chủ">
-            <img class="brand__logo" src="<?= e(asset('img/logo.svg')) ?>" alt="Logo <?= e(setting('ten_truong')) ?>" width="52" height="60">
+        <a class="brand" href="<?= e(url('/')) ?>" aria-label="<?= e(setting('ten_truong', APP_NAME)) ?> – Trang chủ">
+            <img class="brand__logo" src="<?= e(asset('img/logo.svg')) ?>" alt="Logo <?= e(setting('ten_truong', APP_NAME)) ?>" width="52" height="60">
             <span class="brand__text">
-                <span class="brand__name"><?= e(setting('ten_truong')) ?></span>
+                <span class="brand__name"><?= e(setting('ten_truong', APP_NAME)) ?></span>
                 <span class="brand__name-en"><?= e(setting('ten_truong_en')) ?></span>
             </span>
         </a>
