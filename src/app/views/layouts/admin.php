@@ -29,11 +29,11 @@ $adminTabs = [
     <link rel="stylesheet" href="<?= e(asset('css/app.css')) ?>">
     <link rel="stylesheet" href="<?= e(asset('css/admin.css')) ?>">
 </head>
-<body class="admin-body">
+<body class="admin-body<?= $currentUser ? '' : ' admin-body--guest' ?>">
     <header class="admin-topbar">
         <div class="admin-topbar__inner">
             <a class="admin-brand" href="<?= e(url('/admin')) ?>">
-                <img src="<?= e(asset('img/logo.svg')) ?>" alt="Logo" width="36" height="42">
+                <span class="admin-brand__logo"><img src="<?= e(asset('img/logo.svg')) ?>" alt="Logo" width="32" height="37"></span>
                 <span class="admin-brand__text"><?= e($schoolName) ?> – Trang quản trị</span>
             </a>
             <?php if ($currentUser): ?>
