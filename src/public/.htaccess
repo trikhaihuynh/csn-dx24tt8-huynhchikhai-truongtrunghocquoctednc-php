@@ -1,4 +1,5 @@
-# Đưa mọi request không trỏ tới file/thư mục có thật về index.php (front controller).
+Options -Indexes
+
 RewriteEngine On
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d

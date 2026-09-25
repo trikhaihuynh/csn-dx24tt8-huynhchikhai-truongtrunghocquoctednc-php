@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 104 120" width="104" height="120" role="img" aria-label="DNC">
+  <path d="M52 3 L99 17 V58 C99 88 79 106 52 117 C25 106 5 88 5 58 V17 Z" fill="#0f2c59" stroke="#e5b53a" stroke-width="5"/>
+  <path d="M52 14 L89 25 V58 C89 82 73 97 52 106 C31 97 15 82 15 58 V25 Z" fill="none" stroke="#e5b53a" stroke-width="1.5" opacity="0.6"/>
+  <path d="M34 40 L52 32 L70 40 L52 48 Z" fill="#e5b53a"/>
+  <path d="M40 44 V51 C46 55 58 55 64 51 V44 L52 50 Z" fill="#e5b53a"/>
+  <text x="52" y="82" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif" font-size="25" font-weight="700" fill="#ffffff" letter-spacing="1">DNC</text>
+</svg>

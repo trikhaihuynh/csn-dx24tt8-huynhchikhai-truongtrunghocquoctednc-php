@@ -1,0 +1,136 @@
+.admin-body {
+    min-height: 100vh;
+    background: var(--bg);
+}
+
+.admin-topbar {
+    background: var(--navy);
+    color: #fff;
+    border-bottom: 3px solid var(--gold);
+}
+
+.admin-topbar__inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    max-width: 1320px;
+    margin: 0 auto;
+    padding: 12px 24px;
+}
+
+.admin-brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: #fff;
+}
+
+.admin-brand:hover {
+    color: var(--gold);
+}
+
+.admin-brand__text {
+    font-size: 0.95rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+}
+
+.admin-user {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.admin-user__name {
+    font-weight: 600;
+}
+
+.admin-user__logout {
+    margin: 0;
+}
+
+.admin-tabs {
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    box-shadow: var(--shadow);
+}
+
+.admin-tabs__list {
+    display: flex;
+    gap: 4px;
+    max-width: 1320px;
+    margin: 0 auto;
+    padding: 0 24px;
+    overflow-x: auto;
+    list-style: none;
+}
+
+.admin-tabs__link {
+    display: block;
+    padding: 14px 16px;
+    border-bottom: 3px solid transparent;
+    font-size: 0.92rem;
+    font-weight: 600;
+    color: var(--text);
+    white-space: nowrap;
+}
+
+.admin-tabs__link:hover,
+.admin-tabs__link.active {
+    color: var(--navy);
+    border-bottom-color: var(--gold);
+}
+
+.admin-main {
+    max-width: 1320px;
+    margin: 0 auto;
+    padding: 0 24px 48px;
+}
+
+.admin-main .flash-wrapper {
+    padding-left: 0;
+    padding-right: 0;
+}
+
+.admin-content {
+    padding-top: 24px;
+}
+
+.admin-page-header {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 20px;
+}
+
+.admin-page-header h1 {
+    margin: 0;
+    font-size: 1.5rem;
+    text-transform: uppercase;
+}
+
+.admin-card {
+    padding: 24px;
+    background: var(--surface);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+}
+
+@media (max-width: 768px) {
+    .admin-topbar__inner {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .admin-brand__text {
+        font-size: 0.8rem;
+    }
+
+    .admin-main {
+        padding: 0 12px 32px;
+    }
+}

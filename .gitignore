@@ -407,4 +407,5 @@ FodyWeavers.xsd
 src/public/uploads/*
 !src/public/uploads/.gitkeep
 !src/public/uploads/README.md
+!src/public/uploads/.htaccess
 docker/.env
