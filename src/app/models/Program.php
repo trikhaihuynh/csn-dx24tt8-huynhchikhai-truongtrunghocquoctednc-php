@@ -22,4 +22,18 @@ final class Program extends Model
 
         return $statement->fetchAll();
     }
+
+    public function findActiveBySlug(string $slug): ?array
+    {
+        $statement = $this->db->prepare(
+            "SELECT id, ten, slug, mo_ta, noi_dung, hinh_dai_dien, thu_tu
+             FROM `{$this->table}`
+             WHERE slug = ? AND trang_thai = 1
+             LIMIT 1"
+        );
+        $statement->execute([$slug]);
+        $program = $statement->fetch();
+
+        return $program !== false && $program['slug'] === $slug ? $program : null;
+    }
 }
