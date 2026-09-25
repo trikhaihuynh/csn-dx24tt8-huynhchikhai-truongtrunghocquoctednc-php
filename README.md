@@ -90,7 +90,7 @@ Các bảng dữ liệu đã cài đặt (MySQL, `utf8mb4_unicode_ci`): `nguoi_d
 | M7 | F03, F06 | Quản lý chương trình đào tạo: thêm, sửa, xóa, ẩn/hiện, thứ tự | `/admin/chuong-trinh` | Hoàn thành |
 | M8 | F02, F06 | Thư viện ảnh (lọc theo album, xem ảnh lớn) và quản lý ảnh (tải nhiều ảnh một lần) | `/hinh-anh`, `/admin/hinh-anh` | Hoàn thành |
 | M9 | F05, F01, F06 | Xử lý hồ sơ đăng ký (đổi trạng thái, ghi chú), cài đặt thông tin trường, quản lý tài khoản | `/admin/dang-ky`, `/admin/cai-dat`, `/admin/tai-khoan` | Hoàn thành |
-| M10 | — | Hoàn thiện giao diện (tinh chỉnh responsive, tin liên quan) | — | Chưa làm |
+| M10 | — | Hoàn thiện giao diện (responsive, lightbox, tin liên quan, trang lỗi) | `/hinh-anh`, `/tin-tuc/{slug}` | Hoàn thành (thực hiện trong M0, M3, M8) |
 
 "Hoàn thành" nghĩa là module đã chạy được trên môi trường Docker và đạt các ca kiểm thử ở mục 11.
 
@@ -146,7 +146,7 @@ Các bảng dữ liệu đã cài đặt (MySQL, `utf8mb4_unicode_ci`): `nguoi_d
 | 3 | 31/08/2026 - 06/09/2026 | Nghiên cứu chuyên sâu, phân tích mô hình và dữ liệu | Hoàn thành theo giai đoạn |
 | 4 | 07/09/2026 - 13/09/2026 | Tiếp tục phân tích và thiết kế | Hoàn thành theo giai đoạn |
 | 5 | 14/09/2026 - 20/09/2026 | Viết và chuẩn hóa báo cáo | Đang thực hiện |
-| 6 | 21/09/2026 - 27/09/2026 | Xây dựng chương trình và kiểm thử | Hoàn thành M0–M9, kiểm thử TC01–TC06 đạt; M10 chưa làm |
+| 6 | 21/09/2026 - 27/09/2026 | Xây dựng chương trình và kiểm thử | Hoàn thành M0–M10, kiểm thử TC01–TC06 đạt |
 
 ### Mốc quan trọng
 - **02/09/2026:** Đã nộp đề cương báo cáo đồ án.
@@ -213,7 +213,6 @@ Môi trường: Docker (PHP 8.2 + Apache, MySQL 8.0), http://localhost:8080. Ng�
 Tổng hợp: chức năng đạt 6/6, bảo mật đạt 6/6. Ngoài ra đã kiểm các luồng đầy đủ: đăng ký → quản trị xử lý → xóa; tin công khai → chuyển nháp → xóa; ẩn/hiện chương trình; phân quyền biên tập viên.
 
 ## 12. Kế hoạch tiếp theo
-- Hoàn thiện giao diện (M10) nếu còn thời gian.
 - Viết chương cài đặt, kết quả và kiểm thử trong báo cáo, kèm ảnh chụp màn hình các trang.
 - Thay dữ liệu mẫu (địa chỉ, số điện thoại, email, hình ảnh, nội dung chương trình và tin tức) bằng thông tin chính thức khi có.
 - Ghi nhận các hạn chế còn lại vào phần kết luận của báo cáo.
