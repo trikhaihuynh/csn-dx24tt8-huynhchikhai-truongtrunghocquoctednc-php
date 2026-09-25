@@ -321,6 +321,8 @@
 .badge-dang_xu_ly { background: #fef3c7; color: #92400e; }
 .badge-da_lien_he { background: #dcfce7; color: #166534; }
 .badge-tu_choi { background: #fee2e2; color: #991b1b; }
+.badge-visible { background: #dcfce7; color: #166534; }
+.badge-hidden { background: #f3f4f6; color: #4b5563; }
 
 .badge {
     white-space: nowrap;
