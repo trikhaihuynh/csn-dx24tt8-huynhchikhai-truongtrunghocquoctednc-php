@@ -23,6 +23,16 @@ final class Program extends Model
         return $statement->fetchAll();
     }
 
+    public function isActive(int $id): bool
+    {
+        $statement = $this->db->prepare(
+            "SELECT 1 FROM `{$this->table}` WHERE id = ? AND trang_thai = 1 LIMIT 1"
+        );
+        $statement->execute([$id]);
+
+        return $statement->fetchColumn() !== false;
+    }
+
     public function findActiveBySlug(string $slug): ?array
     {
         $statement = $this->db->prepare(
