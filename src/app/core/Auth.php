@@ -28,6 +28,18 @@ final class Auth
         $_SESSION['auth_user'] = $userRow;
     }
 
+    public static function refresh(array $userRow): void
+    {
+        if (!self::check()) {
+            return;
+        }
+        foreach (['ho_ten', 'email', 'vai_tro'] as $field) {
+            if (array_key_exists($field, $userRow)) {
+                $_SESSION['auth_user'][$field] = $userRow[$field];
+            }
+        }
+    }
+
     public static function logout(): void
     {
         unset($_SESSION['auth_user']);

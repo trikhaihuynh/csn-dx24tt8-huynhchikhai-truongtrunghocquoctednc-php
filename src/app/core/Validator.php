@@ -94,8 +94,20 @@ final class Validator
                 ? null : $label . ' phải là số.',
             'confirmed' => $value === $this->value($field . '_confirmation')
                 ? null : $label . ' xác nhận không khớp.',
+            'url' => $this->isHttpUrl($value)
+                ? null : $label . ' phải là đường dẫn bắt đầu bằng http:// hoặc https://.',
             default => null,
         };
+    }
+
+    private function isHttpUrl(string $value): bool
+    {
+        if (filter_var($value, FILTER_VALIDATE_URL) === false) {
+            return false;
+        }
+        $scheme = strtolower((string) parse_url($value, PHP_URL_SCHEME));
+
+        return in_array($scheme, ['http', 'https'], true);
     }
 
     private function dateError(string $label, string $value): ?string

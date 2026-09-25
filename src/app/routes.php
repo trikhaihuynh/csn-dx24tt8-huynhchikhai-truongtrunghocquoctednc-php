@@ -30,3 +30,18 @@ $router->post('/admin/tin-tuc/them', [Admin\NewsController::class, 'store']);
 $router->get('/admin/tin-tuc/{id}/sua', [Admin\NewsController::class, 'edit']);
 $router->post('/admin/tin-tuc/{id}/sua', [Admin\NewsController::class, 'update']);
 $router->post('/admin/tin-tuc/{id}/xoa', [Admin\NewsController::class, 'destroy']);
+
+$router->get('/admin/dang-ky', [Admin\AdmissionController::class, 'index']);
+$router->get('/admin/dang-ky/{id}', [Admin\AdmissionController::class, 'show']);
+$router->post('/admin/dang-ky/{id}', [Admin\AdmissionController::class, 'update']);
+$router->post('/admin/dang-ky/{id}/xoa', [Admin\AdmissionController::class, 'destroy']);
+
+$router->get('/admin/cai-dat', [Admin\SettingController::class, 'edit']);
+$router->post('/admin/cai-dat', [Admin\SettingController::class, 'update']);
+
+$router->get('/admin/tai-khoan', [Admin\UserController::class, 'index']);
+$router->get('/admin/tai-khoan/them', [Admin\UserController::class, 'create']);
+$router->post('/admin/tai-khoan/them', [Admin\UserController::class, 'store']);
+$router->get('/admin/tai-khoan/{id}/sua', [Admin\UserController::class, 'edit']);
+$router->post('/admin/tai-khoan/{id}/sua', [Admin\UserController::class, 'update']);
+$router->post('/admin/tai-khoan/{id}/xoa', [Admin\UserController::class, 'destroy']);
