@@ -11,7 +11,17 @@ final class News extends Model
 {
     public const STATUSES = ['nhap' => 'Nháp', 'cong_khai' => 'Công khai'];
 
+    private const SLUG_BASE_MAX_LENGTH = 200;
+    private const DEFAULT_SLUG = 'tin-tuc';
+
     protected string $table = 'tin_tuc';
+
+    public static function isPublished(array $article): bool
+    {
+        $publishedAt = strtotime((string) ($article['ngay_dang'] ?? ''));
+
+        return ($article['trang_thai'] ?? '') === 'cong_khai' && $publishedAt !== false && $publishedAt <= time();
+    }
 
     public function latestPublished(int $limit): array
     {
@@ -82,5 +92,80 @@ final class News extends Model
         $statement->execute();
 
         return $statement->fetchAll();
+    }
+
+    public function search(string $keyword, ?string $status, int $limit, int $offset): array
+    {
+        [$whereClause, $parameters] = $this->searchConditions($keyword, $status);
+        $statement = $this->db->prepare(
+            "SELECT id, tieu_de, slug, hinh_dai_dien, trang_thai, ngay_dang, luot_xem
+             FROM `{$this->table}`
+             {$whereClause}
+             ORDER BY ngay_dang DESC, id DESC
+             LIMIT :limit OFFSET :offset"
+        );
+        foreach ($parameters as $placeholder => $value) {
+            $statement->bindValue($placeholder, $value);
+        }
+        $statement->bindValue(':limit', max(1, $limit), PDO::PARAM_INT);
+        $statement->bindValue(':offset', max(0, $offset), PDO::PARAM_INT);
+        $statement->execute();
+
+        return $statement->fetchAll();
+    }
+
+    public function countSearch(string $keyword, ?string $status): int
+    {
+        [$whereClause, $parameters] = $this->searchConditions($keyword, $status);
+        $statement = $this->db->prepare("SELECT COUNT(*) FROM `{$this->table}` {$whereClause}");
+        $statement->execute($parameters);
+
+        return (int) $statement->fetchColumn();
+    }
+
+    public function slugExists(string $slug, ?int $ignoreId = null): bool
+    {
+        $statement = $this->db->prepare(
+            "SELECT COUNT(*) FROM `{$this->table}` WHERE slug = :slug AND id <> :ignore_id"
+        );
+        $statement->bindValue(':slug', $slug);
+        $statement->bindValue(':ignore_id', $ignoreId ?? 0, PDO::PARAM_INT);
+        $statement->execute();
+
+        return (int) $statement->fetchColumn() > 0;
+    }
+
+    public function uniqueSlug(string $base, ?int $ignoreId = null): string
+    {
+        $base = trim(substr($base, 0, self::SLUG_BASE_MAX_LENGTH), '-');
+        if ($base === '') {
+            $base = self::DEFAULT_SLUG;
+        }
+
+        $slug = $base;
+        $suffix = 2;
+        while ($this->slugExists($slug, $ignoreId)) {
+            $slug = $base . '-' . $suffix;
+            $suffix++;
+        }
+
+        return $slug;
+    }
+
+    private function searchConditions(string $keyword, ?string $status): array
+    {
+        $conditions = [];
+        $parameters = [];
+        $keyword = trim($keyword);
+        if ($keyword !== '') {
+            $conditions[] = 'tieu_de LIKE :keyword';
+            $parameters[':keyword'] = '%' . addcslashes($keyword, '%_\\') . '%';
+        }
+        if ($status !== null && array_key_exists($status, self::STATUSES)) {
+            $conditions[] = 'trang_thai = :status';
+            $parameters[':status'] = $status;
+        }
+
+        return [$conditions === [] ? '' : 'WHERE ' . implode(' AND ', $conditions), $parameters];
     }
 }

@@ -36,7 +36,9 @@ function upload_url(?string $relativePath): string
 
 function old(string $key, mixed $default = ''): mixed
 {
-    return $_SESSION['_old'][$key] ?? $default;
+    $value = $_SESSION['_old'][$key] ?? null;
+
+    return is_scalar($value) ? $value : $default;
 }
 
 function flash_get(): ?array

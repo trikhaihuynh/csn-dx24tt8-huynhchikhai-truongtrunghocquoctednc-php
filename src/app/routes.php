@@ -23,3 +23,10 @@ $router->get('/admin/login', [Admin\AuthController::class, 'showLogin']);
 $router->post('/admin/login', [Admin\AuthController::class, 'login']);
 $router->post('/admin/logout', [Admin\AuthController::class, 'logout']);
 $router->get('/admin', [Admin\DashboardController::class, 'index']);
+
+$router->get('/admin/tin-tuc', [Admin\NewsController::class, 'index']);
+$router->get('/admin/tin-tuc/them', [Admin\NewsController::class, 'create']);
+$router->post('/admin/tin-tuc/them', [Admin\NewsController::class, 'store']);
+$router->get('/admin/tin-tuc/{id}/sua', [Admin\NewsController::class, 'edit']);
+$router->post('/admin/tin-tuc/{id}/sua', [Admin\NewsController::class, 'update']);
+$router->post('/admin/tin-tuc/{id}/xoa', [Admin\NewsController::class, 'destroy']);
