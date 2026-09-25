@@ -27,11 +27,12 @@ function asset(string $path): string
 function upload_url(?string $relativePath): string
 {
     $relativePath = ltrim((string) $relativePath, '/');
-    if ($relativePath === '' || !is_file(PUBLIC_PATH . '/uploads/' . $relativePath)) {
+    $publicPath = str_starts_with($relativePath, 'assets/') ? $relativePath : 'uploads/' . $relativePath;
+    if ($relativePath === '' || str_contains($relativePath, '..') || !is_file(PUBLIC_PATH . '/' . $publicPath)) {
         return asset('img/placeholder.jpg');
     }
 
-    return url('uploads/' . $relativePath);
+    return url($publicPath);
 }
 
 function old(string $key, mixed $default = ''): mixed
