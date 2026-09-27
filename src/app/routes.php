@@ -31,6 +31,13 @@ $router->get('/admin/tin-tuc/{id}/sua', [Admin\NewsController::class, 'edit']);
 $router->post('/admin/tin-tuc/{id}/sua', [Admin\NewsController::class, 'update']);
 $router->post('/admin/tin-tuc/{id}/xoa', [Admin\NewsController::class, 'destroy']);
 
+$router->get('/admin/chuong-trinh', [Admin\ProgramController::class, 'index']);
+$router->get('/admin/chuong-trinh/them', [Admin\ProgramController::class, 'create']);
+$router->post('/admin/chuong-trinh/them', [Admin\ProgramController::class, 'store']);
+$router->get('/admin/chuong-trinh/{id}/sua', [Admin\ProgramController::class, 'edit']);
+$router->post('/admin/chuong-trinh/{id}/sua', [Admin\ProgramController::class, 'update']);
+$router->post('/admin/chuong-trinh/{id}/xoa', [Admin\ProgramController::class, 'destroy']);
+
 $router->get('/admin/dang-ky', [Admin\AdmissionController::class, 'index']);
 $router->get('/admin/dang-ky/{id}', [Admin\AdmissionController::class, 'show']);
 $router->post('/admin/dang-ky/{id}', [Admin\AdmissionController::class, 'update']);
