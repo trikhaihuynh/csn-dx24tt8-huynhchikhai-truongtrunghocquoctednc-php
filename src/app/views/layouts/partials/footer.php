@@ -49,7 +49,7 @@ $socialLinks = array_filter([
             <?php if ($socialLinks): ?>
                 <ul class="social-links">
                     <?php foreach ($socialLinks as $networkName => $networkUrl): ?>
-                        <li><a class="social-links__item" href="<?= e($networkUrl) ?>" target="_blank" rel="noopener noreferrer"><?= e($networkName) ?></a></li>
+                        <li><a class="social-links__item" href="<?= e(safe_url($networkUrl)) ?>" target="_blank" rel="noopener noreferrer"><?= e($networkName) ?></a></li>
                     <?php endforeach; ?>
                 </ul>
             <?php endif; ?>
@@ -58,7 +58,7 @@ $socialLinks = array_filter([
 
     <div class="site-footer__bottom">
         <div class="container">
-            &copy; <?= e(date('Y')) ?> <?= e(setting('ten_truong')) ?>. Bảo lưu mọi quyền.
+            &copy; <?= e(date('Y')) ?> <?= e(setting('ten_truong', APP_NAME)) ?>. Bảo lưu mọi quyền.
         </div>
     </div>
 </footer>
