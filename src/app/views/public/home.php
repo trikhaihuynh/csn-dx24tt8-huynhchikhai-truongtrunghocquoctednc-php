@@ -1,10 +1,19 @@
-<section class="hero hero--home" style="background-image: url('<?= e(asset('img/hero-campus.svg')) ?>');">
-    <div class="container hero__inner">
-        <p class="hero__eyebrow"><?= e($schoolName) ?></p>
-        <h1 class="hero__title"><?= e($slogan) ?></h1>
-        <div class="hero__actions">
-            <a class="btn btn-gold btn-lg" href="<?= e(url('/dang-ky-nhap-hoc')) ?>">Đăng ký nhập học</a>
-            <a class="btn btn-outline-light btn-lg" href="<?= e(url('/gioi-thieu')) ?>">Tìm hiểu thêm</a>
+<section class="home-banner">
+    <img
+        class="home-banner__image"
+        src="<?= e(asset('img/home-banner.jpg')) ?>"
+        alt="<?= e($schoolName) ?>"
+        width="1983"
+        height="793"
+        fetchpriority="high"
+    >
+    <div class="home-banner__bar">
+        <div class="container home-banner__inner">
+            <h1 class="home-banner__title"><?= e($slogan) ?></h1>
+            <div class="home-banner__actions">
+                <a class="btn btn-gold btn-lg" href="<?= e(url('/dang-ky-nhap-hoc')) ?>">Đăng ký nhập học</a>
+                <a class="btn btn-outline-light btn-lg" href="<?= e(url('/gioi-thieu')) ?>">Tìm hiểu thêm</a>
+            </div>
         </div>
     </div>
 </section>
