@@ -69,4 +69,18 @@ final class News extends Model
         );
         $statement->execute([$id]);
     }
+
+    public function latest(int $limit): array
+    {
+        $statement = $this->db->prepare(
+            "SELECT id, tieu_de, slug, trang_thai, ngay_dang, luot_xem, ngay_tao
+             FROM `{$this->table}`
+             ORDER BY ngay_tao DESC, id DESC
+             LIMIT :limit"
+        );
+        $statement->bindValue(':limit', max(1, $limit), PDO::PARAM_INT);
+        $statement->execute();
+
+        return $statement->fetchAll();
+    }
 }

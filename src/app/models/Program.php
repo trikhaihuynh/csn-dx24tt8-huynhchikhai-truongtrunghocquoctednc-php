@@ -46,4 +46,12 @@ final class Program extends Model
 
         return $program !== false && $program['slug'] === $slug ? $program : null;
     }
+
+    public function countActive(): int
+    {
+        $statement = $this->db->prepare("SELECT COUNT(*) FROM `{$this->table}` WHERE trang_thai = 1");
+        $statement->execute();
+
+        return (int) $statement->fetchColumn();
+    }
 }
