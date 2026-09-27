@@ -403,3 +403,9 @@ FodyWeavers.xsd
 .note/
 *.env
 .doc/
+# DNC website - file upload va du lieu cuc bo
+src/public/uploads/*
+!src/public/uploads/.gitkeep
+!src/public/uploads/README.md
+!src/public/uploads/.htaccess
+docker/.env
