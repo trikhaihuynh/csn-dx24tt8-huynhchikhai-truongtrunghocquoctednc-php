@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 use App\Controllers\Admin;
 use App\Controllers\AdmissionController;
+use App\Controllers\GalleryController;
 use App\Controllers\HomeController;
 use App\Controllers\NewsController;
 use App\Controllers\ProgramController;
@@ -15,6 +16,7 @@ $router->get('/chuong-trinh', [ProgramController::class, 'index']);
 $router->get('/chuong-trinh/{slug}', [ProgramController::class, 'show']);
 $router->get('/tin-tuc', [NewsController::class, 'index']);
 $router->get('/tin-tuc/{slug}', [NewsController::class, 'show']);
+$router->get('/hinh-anh', [GalleryController::class, 'index']);
 $router->get('/dang-ky-nhap-hoc', [AdmissionController::class, 'create']);
 $router->post('/dang-ky-nhap-hoc', [AdmissionController::class, 'store']);
 $router->get('/dang-ky-nhap-hoc/thanh-cong', [AdmissionController::class, 'success']);
@@ -37,6 +39,13 @@ $router->post('/admin/chuong-trinh/them', [Admin\ProgramController::class, 'stor
 $router->get('/admin/chuong-trinh/{id}/sua', [Admin\ProgramController::class, 'edit']);
 $router->post('/admin/chuong-trinh/{id}/sua', [Admin\ProgramController::class, 'update']);
 $router->post('/admin/chuong-trinh/{id}/xoa', [Admin\ProgramController::class, 'destroy']);
+
+$router->get('/admin/hinh-anh', [Admin\GalleryController::class, 'index']);
+$router->get('/admin/hinh-anh/them', [Admin\GalleryController::class, 'create']);
+$router->post('/admin/hinh-anh/them', [Admin\GalleryController::class, 'store']);
+$router->get('/admin/hinh-anh/{id}/sua', [Admin\GalleryController::class, 'edit']);
+$router->post('/admin/hinh-anh/{id}/sua', [Admin\GalleryController::class, 'update']);
+$router->post('/admin/hinh-anh/{id}/xoa', [Admin\GalleryController::class, 'destroy']);
 
 $router->get('/admin/dang-ky', [Admin\AdmissionController::class, 'index']);
 $router->get('/admin/dang-ky/{id}', [Admin\AdmissionController::class, 'show']);

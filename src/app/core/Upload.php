@@ -19,6 +19,54 @@ final class Upload
         return self::store($file, $group, 'docs');
     }
 
+    public static function images(array $files, string $group): array
+    {
+        $result = ['saved' => [], 'errors' => []];
+        foreach (self::normalizeFiles($files) as $index => $file) {
+            if ($file['error'] === UPLOAD_ERR_NO_FILE) {
+                continue;
+            }
+            try {
+                $result['saved'][$index] = self::store($file, $group, 'images');
+            } catch (RuntimeException $exception) {
+                $fileName = $file['name'] !== '' ? $file['name'] : 'Tệp ' . ($index + 1);
+                $result['errors'][self::uniqueKey($result['errors'], $fileName)] = $exception->getMessage();
+            }
+        }
+
+        return $result;
+    }
+
+    public static function normalizeFiles(array $files): array
+    {
+        if (!isset($files['name'], $files['tmp_name'], $files['error'], $files['size'])) {
+            return [];
+        }
+        if (!is_array($files['name'])) {
+            $files = array_map(static fn (mixed $value): array => [$value], $files);
+        }
+
+        $normalized = [];
+        foreach (array_keys($files['name']) as $position => $key) {
+            $name = $files['name'][$key] ?? null;
+            $temporaryName = $files['tmp_name'][$key] ?? null;
+            $error = $files['error'][$key] ?? null;
+            $size = $files['size'][$key] ?? null;
+            if (!is_string($name) || !is_string($temporaryName) || !is_int($error) || !is_int($size)) {
+                continue;
+            }
+            $normalized[$position] = [
+                'name' => basename(str_replace('\\', '/', $name)),
+                'type' => is_string($files['type'][$key] ?? null) ? $files['type'][$key] : '',
+                'tmp_name' => $temporaryName,
+                'error' => $error,
+                'size' => $size,
+            ];
+        }
+
+        return $normalized;
+    }
+
     public static function delete(?string $relativePath): void
     {
         if ($relativePath === null || $relativePath === '') {
@@ -69,6 +117,18 @@ final class Upload
         }
 
         return $safeGroup . '/' . $fileName;
+    }
+
+    private static function uniqueKey(array $existing, string $key): string
+    {
+        $uniqueKey = $key;
+        $suffix = 2;
+        while (array_key_exists($uniqueKey, $existing)) {
+            $uniqueKey = $key . ' (' . $suffix . ')';
+            $suffix++;
+        }
+
+        return $uniqueKey;
     }
 
     private static function config(): array

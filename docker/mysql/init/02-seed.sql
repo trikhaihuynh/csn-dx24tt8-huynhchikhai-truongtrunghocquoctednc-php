@@ -40,10 +40,10 @@ INSERT INTO tin_tuc (tieu_de, slug, tom_tat, noi_dung, trang_thai, nguoi_dung_id
  '<p>Nội dung nháp.</p>', 'nhap', 1, NOW());
 
 INSERT INTO hinh_anh (tieu_de, duong_dan, album, thu_tu) VALUES
-('Thư viện DNC',         'placeholder/thu-vien.jpg',   'co-so-vat-chat', 1),
-('Phòng thí nghiệm',     'placeholder/phong-lab.jpg',  'co-so-vat-chat', 2),
-('Hoạt động thể thao',   'placeholder/the-thao.jpg',   'hoat-dong',      1),
-('Câu lạc bộ nghệ thuật','placeholder/nghe-thuat.jpg', 'hoat-dong',      2);
+('Thư viện DNC',         'assets/img/gallery/thu-vien.jpg',   'co-so-vat-chat', 1),
+('Phòng thí nghiệm',     'assets/img/gallery/phong-lab.jpg',  'co-so-vat-chat', 2),
+('Hoạt động thể thao',   'assets/img/gallery/the-thao.jpg',   'hoat-dong',      1),
+('Câu lạc bộ nghệ thuật','assets/img/gallery/nghe-thuat.jpg', 'hoat-dong',      2);
 
 INSERT INTO dang_ky_nhap_hoc (ho_ten, ngay_sinh, gioi_tinh, ten_phu_huynh, quan_he, email, dien_thoai, khoi_lop, chuong_trinh_id, nguon_biet_den, trang_thai) VALUES
 ('Nguyễn Văn A', '2011-05-20', 'nam', 'Nguyễn Văn B', 'Cha', 'phuhuynh.a@example.com', '0900000001', '10', 1, 'Facebook', 'moi'),
