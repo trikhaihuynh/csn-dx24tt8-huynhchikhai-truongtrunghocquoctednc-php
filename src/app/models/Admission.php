@@ -64,4 +64,85 @@ final class Admission extends Model
 
         return $statement->fetchAll();
     }
+
+    public function search(string $keyword, ?string $status, int $limit, int $offset): array
+    {
+        [$whereClause, $parameters] = $this->searchConditions($keyword, $status);
+        $statement = $this->db->prepare(
+            "SELECT registration.id, registration.ho_ten, registration.ten_phu_huynh, registration.quan_he,
+                    registration.email, registration.dien_thoai, registration.khoi_lop,
+                    registration.trang_thai, registration.ngay_tao,
+                    program.ten AS ten_chuong_trinh
+             FROM `{$this->table}` AS registration
+             LEFT JOIN chuong_trinh AS program ON program.id = registration.chuong_trinh_id
+             {$whereClause}
+             ORDER BY registration.ngay_tao DESC, registration.id DESC
+             LIMIT :limit OFFSET :offset"
+        );
+        foreach ($parameters as $placeholder => $value) {
+            $statement->bindValue($placeholder, $value);
+        }
+        $statement->bindValue(':limit', max(1, $limit), PDO::PARAM_INT);
+        $statement->bindValue(':offset', max(0, $offset), PDO::PARAM_INT);
+        $statement->execute();
+
+        return $statement->fetchAll();
+    }
+
+    public function countSearch(string $keyword, ?string $status): int
+    {
+        [$whereClause, $parameters] = $this->searchConditions($keyword, $status);
+        $statement = $this->db->prepare(
+            "SELECT COUNT(*) FROM `{$this->table}` AS registration {$whereClause}"
+        );
+        $statement->execute($parameters);
+
+        return (int) $statement->fetchColumn();
+    }
+
+    public function findWithProgram(int $id): ?array
+    {
+        $statement = $this->db->prepare(
+            "SELECT registration.*, program.ten AS ten_chuong_trinh
+             FROM `{$this->table}` AS registration
+             LEFT JOIN chuong_trinh AS program ON program.id = registration.chuong_trinh_id
+             WHERE registration.id = ?
+             LIMIT 1"
+        );
+        $statement->execute([$id]);
+
+        return $statement->fetch() ?: null;
+    }
+
+    public function updateStatus(int $id, string $status, ?string $note): void
+    {
+        $statement = $this->db->prepare(
+            "UPDATE `{$this->table}`
+             SET trang_thai = ?, ghi_chu_admin = ?, ngay_cap_nhat = NOW()
+             WHERE id = ?"
+        );
+        $statement->execute([$status, $note, $id]);
+    }
+
+    private function searchConditions(string $keyword, ?string $status): array
+    {
+        $conditions = [];
+        $parameters = [];
+        $keyword = trim($keyword);
+        if ($keyword !== '') {
+            $pattern = '%' . addcslashes($keyword, '%_\\') . '%';
+            $conditions[] = '(registration.ho_ten LIKE :keyword_name'
+                . ' OR registration.email LIKE :keyword_email'
+                . ' OR registration.dien_thoai LIKE :keyword_phone)';
+            $parameters[':keyword_name'] = $pattern;
+            $parameters[':keyword_email'] = $pattern;
+            $parameters[':keyword_phone'] = $pattern;
+        }
+        if ($status !== null && array_key_exists($status, self::STATUSES)) {
+            $conditions[] = 'registration.trang_thai = :status';
+            $parameters[':status'] = $status;
+        }
+
+        return [$conditions === [] ? '' : 'WHERE ' . implode(' AND ', $conditions), $parameters];
+    }
 }

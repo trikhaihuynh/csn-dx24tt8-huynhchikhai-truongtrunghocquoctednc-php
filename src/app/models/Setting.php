@@ -6,6 +6,7 @@ namespace App\Models;
 
 use App\Core\Database;
 use PDO;
+use Throwable;
 
 final class Setting
 {
@@ -42,5 +43,24 @@ final class Setting
         $this->db->prepare(
             'INSERT INTO `' . self::TABLE . '` (khoa, gia_tri) VALUES (?, ?) ON DUPLICATE KEY UPDATE gia_tri = ?'
         )->execute([$key, $value, $value]);
+    }
+
+    public function allWithDescriptions(): array
+    {
+        return $this->db->query('SELECT khoa, gia_tri, mo_ta FROM `' . self::TABLE . '` ORDER BY khoa')->fetchAll();
+    }
+
+    public function saveMany(array $values): void
+    {
+        $this->db->beginTransaction();
+        try {
+            foreach ($values as $key => $value) {
+                $this->set((string) $key, $value);
+            }
+            $this->db->commit();
+        } catch (Throwable $exception) {
+            $this->db->rollBack();
+            throw $exception;
+        }
     }
 }

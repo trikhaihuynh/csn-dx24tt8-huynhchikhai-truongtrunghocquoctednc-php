@@ -21,11 +21,13 @@ abstract class AdminController extends Controller
             $this->redirect('/admin/login');
         }
 
-        if (!$this->currentUserIsActive()) {
+        $storedUser = $this->storedCurrentUser();
+        if ($storedUser === null || (int) $storedUser['trang_thai'] !== 1) {
             Auth::logout();
             $this->flash('error', 'Tài khoản đã bị khóa.');
             $this->redirect('/admin/login');
         }
+        Auth::refresh($storedUser);
     }
 
     protected function requireRole(string $role): void
@@ -40,11 +42,10 @@ abstract class AdminController extends Controller
         }
     }
 
-    private function currentUserIsActive(): bool
+    private function storedCurrentUser(): ?array
     {
         $userId = (int) (Auth::user()['id'] ?? 0);
-        $storedUser = $userId > 0 ? (new User())->find($userId) : null;
 
-        return $storedUser !== null && (int) $storedUser['trang_thai'] === 1;
+        return $userId > 0 ? (new User())->find($userId) : null;
     }
 }
