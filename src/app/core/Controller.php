@@ -67,8 +67,8 @@ abstract class Controller
     private function withoutSecretFields(array $input): array
     {
         unset($input['_token']);
-        foreach (array_keys($input) as $field) {
-            if (str_contains((string) $field, 'mat_khau')) {
+        foreach ($input as $field => $value) {
+            if (str_contains((string) $field, 'mat_khau') || !is_scalar($value)) {
                 unset($input[$field]);
             }
         }
