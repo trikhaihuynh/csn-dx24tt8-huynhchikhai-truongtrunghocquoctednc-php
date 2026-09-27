@@ -115,6 +115,37 @@ Repository được sử dụng để theo dõi quá trình thực hiện đồ 
 - Không ghi chức năng là hoàn thành nếu chưa phát triển/kiểm thử.
 - Tổ chức source code và tài liệu đúng thư mục.
 
+## 12. Cài đặt và truy cập
+
+### Khởi động bằng Docker
+```bash
+cd docker
+cp .env.example .env
+docker compose up -d --build
+```
+
+Dừng hệ thống: `docker compose down`. Nạp lại cơ sở dữ liệu từ đầu: `docker compose down -v` rồi chạy lại lệnh khởi động.
+
+### Link và tài khoản truy cập
+| Trang | Link truy cập | Tài khoản |
+|---|---|---|
+| Website | http://localhost:8080 | Không cần đăng nhập |
+| Trang quản trị | http://localhost:8080/admin/login | `admin@dnc.edu.vn` / `Admin@123` |
+| phpMyAdmin | http://localhost:8081 | `dnc` / `dnc123` (hoặc `root` / `root`) |
+| MySQL | `localhost:3306`, database `dnc_school` | `dnc` / `dnc123` |
+
+### Các trang theo chức năng
+| Mã | Chức năng | Trang công khai | Trang quản trị |
+|---|---|---|---|
+| F01 | Giới thiệu trường | http://localhost:8080 , http://localhost:8080/gioi-thieu , http://localhost:8080/lien-he | http://localhost:8080/admin/cai-dat |
+| F02 | Hình ảnh | http://localhost:8080/hinh-anh | http://localhost:8080/admin/hinh-anh |
+| F03 | Chương trình đào tạo | http://localhost:8080/chuong-trinh | http://localhost:8080/admin/chuong-trinh |
+| F04 | Tin tức - hoạt động | http://localhost:8080/tin-tuc | http://localhost:8080/admin/tin-tuc |
+| F05 | Đăng ký nhập học | http://localhost:8080/dang-ky-nhap-hoc | http://localhost:8080/admin/dang-ky |
+| F06 | Quản trị nội dung | - | http://localhost:8080/admin , http://localhost:8080/admin/tai-khoan |
+
+> Các tài khoản trên là tài khoản mẫu cho môi trường chạy thử. Cần đổi mật khẩu trước khi triển khai thực tế.
+
 ---
 **Sinh viên:** Huỳnh Chí Khải  
 **MSSV:** 170124955  
