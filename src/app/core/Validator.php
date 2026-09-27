@@ -51,7 +51,7 @@ final class Validator
 
             if ($isEmpty) {
                 if (in_array('required', $rules, true)) {
-                    $this->errors[$field] = 'Vui lòng nhập ' . mb_strtolower($this->label($field)) . '.';
+                    $this->errors[$field] = 'Vui lòng nhập ' . $this->label($field) . '.';
                 }
                 continue;
             }

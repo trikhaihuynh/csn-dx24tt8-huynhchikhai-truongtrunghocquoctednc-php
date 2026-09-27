@@ -1916,3 +1916,142 @@ p {
 .news-item__summary {
     overflow-wrap: anywhere;
 }
+
+.admission-form-card {
+    padding: 36px 40px;
+}
+
+.admission-intro {
+    margin: 0 0 8px;
+    color: var(--muted);
+    overflow-wrap: anywhere;
+}
+
+.admission-alert {
+    margin: 16px 0 0;
+}
+
+.admission-group {
+    min-width: 0;
+    margin: 0 0 8px;
+    padding: 0;
+    border: 0;
+}
+
+.admission-group .form-section-title {
+    display: block;
+    width: 100%;
+    float: left;
+}
+
+.admission-group .form-section-title + * {
+    clear: both;
+}
+
+.admission-form .form-row {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.admission-form .form-group input[type="file"] {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    padding: 8px;
+    border: 1px dashed #cfd6e0;
+    border-radius: var(--radius-sm);
+    background: var(--bg);
+    font-family: inherit;
+    font-size: 0.9rem;
+}
+
+.admission-form .form-group.has-error input[type="file"] {
+    border-color: var(--danger);
+}
+
+.admission-form .form-error {
+    overflow-wrap: anywhere;
+}
+
+.choice-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px 22px;
+    padding: 10px 0;
+}
+
+.form-group .choice {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin: 0;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+.choice input {
+    width: 18px;
+    height: 18px;
+    margin: 0;
+    accent-color: var(--navy);
+}
+
+.admission-actions {
+    padding-top: 20px;
+    border-top: 1px solid var(--border);
+}
+
+.admission-success {
+    text-align: center;
+    padding: 48px 40px;
+}
+
+.admission-success__icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 76px;
+    height: 76px;
+    margin-bottom: 18px;
+    border-radius: 50%;
+    background: #ecfdf3;
+    color: var(--success);
+}
+
+.admission-success__title {
+    margin: 0 0 12px;
+    font-size: 1.5rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    color: var(--navy);
+}
+
+.admission-success__text,
+.admission-success__contact {
+    max-width: 580px;
+    margin: 0 auto 12px;
+    color: var(--muted);
+    overflow-wrap: anywhere;
+}
+
+.admission-success__actions {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 12px;
+    margin-top: 24px;
+}
+
+@media (max-width: 768px) {
+    .admission-form-card,
+    .admission-success {
+        padding: 22px 18px;
+    }
+
+    .admission-form .form-row {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .admission-actions .btn-success {
+        flex: 1 1 100%;
+    }
+}
