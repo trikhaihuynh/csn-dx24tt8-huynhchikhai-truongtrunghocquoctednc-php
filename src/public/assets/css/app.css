@@ -2227,3 +2227,59 @@ p {
         grid-template-columns: minmax(0, 1fr);
     }
 }
+
+.home-banner {
+    background-color: #04326d;
+}
+
+.home-banner__image {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+.home-banner__bar {
+    padding: 28px 0 36px;
+    color: #fff;
+    background-image: linear-gradient(180deg, #04326d 0%, var(--navy) 100%);
+}
+
+.home-banner__inner {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px 32px;
+}
+
+.home-banner__title {
+    margin: 0;
+    color: #fff;
+    font-size: clamp(1.5rem, 1rem + 1.8vw, 2.25rem);
+    font-weight: 800;
+    letter-spacing: 0.04em;
+    line-height: 1.2;
+    text-transform: uppercase;
+    overflow-wrap: anywhere;
+}
+
+.home-banner__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+@media (max-width: 768px) {
+    .home-banner__bar {
+        padding: 20px 0 28px;
+    }
+
+    .home-banner__inner {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .home-banner__actions {
+        justify-content: center;
+    }
+}
